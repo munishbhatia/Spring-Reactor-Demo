@@ -9,17 +9,17 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.r2dbc.config.AbstractR2dbcConfiguration;
 import org.springframework.data.r2dbc.repository.config.EnableR2dbcRepositories;
-import springfox.documentation.builders.PathSelectors;
-import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.spi.DocumentationType;
-import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger2.annotations.EnableSwagger2WebFlux;
+//import springfox.documentation.builders.PathSelectors;
+//import springfox.documentation.builders.RequestHandlerSelectors;
+//import springfox.documentation.spi.DocumentationType;
+//import springfox.documentation.spring.web.plugins.Docket;
+//import springfox.documentation.swagger2.annotations.EnableSwagger2WebFlux;
 
 import javax.annotation.PreDestroy;
 
 @SpringBootApplication
 @EnableR2dbcRepositories
-@EnableSwagger2WebFlux
+//@EnableSwagger2WebFlux
 @Configuration
 public class SpringReactorDemoApplication extends AbstractR2dbcConfiguration {
 
@@ -41,8 +41,14 @@ public class SpringReactorDemoApplication extends AbstractR2dbcConfiguration {
     @Override
     @Bean
     public ConnectionFactory connectionFactory() {
+//        String DBHOST = System.getProperty("DB_HOST_ADDRESS");
+//        if(null == DBHOST)
+//            DBHOST = System.getenv("DB_HOST_ADDRESS");
         PostgresqlConnectionConfiguration connectionConfiguration = PostgresqlConnectionConfiguration.builder()
-                .host("localhost")
+//                .host("localhost")
+//                .host("172.17.0.8") //TODO: How to have Kubernetes handle this using a generic name/svc name/other options
+//                .host("10.104.111.222") //TODO: How to have Kubernetes handle this using a generic name/svc name/other options
+                .host("postgres-db.default.svc.cluster.local") //TODO: How to have Kubernetes handle this using a generic name/svc name/other options
                 .port(5432)
                 .database("articledb")
                 .username("postgres")
@@ -51,12 +57,12 @@ public class SpringReactorDemoApplication extends AbstractR2dbcConfiguration {
         return new PostgresqlConnectionFactory(connectionConfiguration);
     }
 
-    @Bean
-    public Docket api() {
-        return new Docket(DocumentationType.SWAGGER_2)
-                .select()
-                .apis(RequestHandlerSelectors.any())
-                .paths(PathSelectors.any())
-                .build();
-    }
+//    @Bean
+//    public Docket api() {
+//        return new Docket(DocumentationType.SWAGGER_2)
+//                .select()
+//                .apis(RequestHandlerSelectors.any())
+//                .paths(PathSelectors.any())
+//                .build();
+//    }
 }

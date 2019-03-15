@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-reactor-api
+  labels:
+    app: spring-reactor-api
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: spring-reactor-api
+      labels:
+        app: spring-reactor-api
+    spec:
+      containers:
+        - name: spring-reactor-api
+          image: spring-reactor-demo-api:latest
+          imagePullPolicy: IfNotPresent
+#      restartPolicy: Always
+  selector:
+    matchLabels:
+      app: spring-reactor-api
