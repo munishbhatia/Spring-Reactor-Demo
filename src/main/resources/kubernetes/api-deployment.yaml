@@ -14,7 +14,8 @@ spec:
     spec:
       containers:
         - name: spring-reactor-api
-          image: spring-reactor-demo-api:latest
+#          image: spring-reactor-demo-api:latest
+          image: gcr.io/trade-plat-dev/spring-reactor-demo-api:latest
           imagePullPolicy: IfNotPresent
 #      restartPolicy: Always
   selector:

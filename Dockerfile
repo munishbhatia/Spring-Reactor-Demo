@@ -44,6 +44,6 @@
 
 
 FROM maven:3.3-jdk-8-onbuild
-RUN echo "PWD is: $PWD"
+#RUN echo "PWD is: $PWD"
 EXPOSE 8080
 ENTRYPOINT ["java","-jar","/usr/src/app/target/springreactordemo-0.0.1-SNAPSHOT.jar"]
